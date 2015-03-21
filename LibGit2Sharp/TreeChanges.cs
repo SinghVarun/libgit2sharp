@@ -64,7 +64,10 @@ namespace LibGit2Sharp
             var treeEntryChanges = new TreeEntryChanges(delta);
 
             fileDispatcher[treeEntryChanges.Status](this, treeEntryChanges);
-            changes.Add(treeEntryChanges.Path, treeEntryChanges);
+            if (!changes.ContainsKey(treeEntryChanges.Path))
+            {
+                changes.Add(treeEntryChanges.Path, treeEntryChanges);
+            }
         }
 
         #region IEnumerable<TreeEntryChanges> Members
